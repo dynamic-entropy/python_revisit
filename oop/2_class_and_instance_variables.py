@@ -1,5 +1,5 @@
 
-# Class variable
+# Class variable vs Instance variables
 
 class Employee:
 
