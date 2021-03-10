@@ -1,0 +1,26 @@
+version: "3.9"
+
+services:
+  marketplace:
+    build:
+      context: .
+      dockerfile: marketplace_microservice/Dockerfile
+    environment:
+      RECOMMENDATION_HOST: recommendations
+    image: marketplace
+    networks:
+      - bookstore
+    ports:
+      - 5000:5000
+
+  recommendations:
+    build:
+      context: .
+      dockerfile: recommendation_microservice/Dockerfile
+
+    image: recommendations
+    networks:
+      - bookstore
+
+networks:
+  bookstore:

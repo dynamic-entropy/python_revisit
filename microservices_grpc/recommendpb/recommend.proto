@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+// The message definations for the recommendation API
+
+// Recommendation request has following features:
+// UserID: used to personalise recommendation
+// Book Genre: for categorisation of books
+// Max results: limit to response
+
+// Recommendation response will have following data:
+// Book Id: unique for wach book
+// Book title: name of book
+
+enum BookGenre {
+    UNKNOWN = 0;
+    SCIENCE_FICTION = 1;
+    NON_FICTION = 2;
+    FANTASY = 3;
+    MYSTERY = 4;
+    ROMANCE = 5;
+    BIOGRAPHY = 6;
+}
+
+message RecommendRequest {
+    string user_id = 1;
+    BookGenre genre = 2;
+    int32 max_results = 3;
+}
+
+message BookRecommendation {
+    string book_id = 1;
+    string title = 2;
+}
+
+message RecommendResponse {
+    repeated BookRecommendation recommendations = 1;
+}
+
+
+service Recommendation {
+    rpc Recommend(RecommendRequest) returns (RecommendResponse);
+}
